@@ -35,6 +35,10 @@ export default function Index() {
     setTitle("");
   };
 
+  const handleDeleteTodo = (id: string) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
   const handleToggleTodo = (id: string) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
@@ -82,14 +86,29 @@ export default function Index() {
             style={({ pressed }) => [styles.item, pressed && styles.itemPressed]}
             onPress={() => handleToggleTodo(item.id)}
           >
-            <Text
-              style={[styles.itemTitle, item.completed && styles.itemTitleDone]}
+            <View style={styles.itemContent}>
+              <Text
+                style={[
+                  styles.itemTitle,
+                  item.completed && styles.itemTitleDone,
+                ]}
+              >
+                {item.title}
+              </Text>
+              <Text style={styles.itemStatus}>
+                {item.completed ? "Đã hoàn thành" : "Chưa hoàn thành"}
+              </Text>
+            </View>
+            <Pressable
+              hitSlop={8}
+              style={({ pressed }) => [
+                styles.deleteButton,
+                pressed && styles.deleteButtonPressed,
+              ]}
+              onPress={() => handleDeleteTodo(item.id)}
             >
-              {item.title}
-            </Text>
-            <Text style={styles.itemStatus}>
-              {item.completed ? "Đã hoàn thành" : "Chưa hoàn thành"}
-            </Text>
+              <Text style={styles.deleteButtonText}>Xóa</Text>
+            </Pressable>
           </Pressable>
         )}
         contentContainerStyle={styles.listContent}
@@ -152,10 +171,16 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   item: {
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 14,
     paddingVertical: 12,
     borderRadius: 8,
     backgroundColor: "#f1f5f9",
+  },
+  itemContent: {
+    flex: 1,
+    marginRight: 12,
   },
   itemPressed: {
     backgroundColor: "#e2e8f0",
@@ -172,6 +197,20 @@ const styles = StyleSheet.create({
     marginTop: 4,
     fontSize: 12,
     color: "#6b7280",
+  },
+  deleteButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 6,
+    backgroundColor: "#fee2e2",
+  },
+  deleteButtonPressed: {
+    backgroundColor: "#fecaca",
+  },
+  deleteButtonText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#b91c1c",
   },
   separator: {
     height: 10,
