@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Header from "@/components/Header";
@@ -44,10 +43,10 @@ export default function Index() {
   const completedCount = todos.filter((todo) => todo.completed).length;
 
   return (
-    <SafeAreaView style={styles.screen}>
+    <SafeAreaView>
       <Header
         title="Mini Todo List"
-        description="Buổi 2 - React Native Fundamentals: component, props, state, xử lý sự kiện, render có điều kiện và render danh sách."
+        description="Buổi 2 - React Native Fundamentals"
       />
       <TodoInput
         value={title}
@@ -63,10 +62,3 @@ export default function Index() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: "#ffffff",
-  },
-});
