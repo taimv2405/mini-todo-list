@@ -18,7 +18,6 @@ export default function TodoInput({
         value={value}
         onChangeText={onChangeText}
         placeholder="Nhập tên công việc"
-        returnKeyType="done"
         onSubmitEditing={onSubmit}
       />
       <Button title="Thêm" onPress={onSubmit} />

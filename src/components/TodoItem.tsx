@@ -12,7 +12,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
     <Pressable style={styles.item} onPress={() => onToggle(todo.id)}>
       <Text style={styles.title}>
-        {todo.completed ? "☑" : "☐"} {todo.title}
+        {todo.completed ? "[Xong]" : "[Chưa xong]"} {todo.title}
       </Text>
       <Button title="Xóa" onPress={() => onDelete(todo.id)} />
     </Pressable>
