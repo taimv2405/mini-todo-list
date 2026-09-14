@@ -1,9 +1,32 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+type Todo = {
+  id: string;
+  title: string;
+  completed: boolean;
+};
 
 export default function Index() {
   const [title, setTitle] = useState("");
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const handleAddTodo = () => {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) {
+      return;
+    }
+
+    const newTodo: Todo = {
+      id: Date.now().toString(),
+      title: trimmedTitle,
+      completed: false,
+    };
+
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
+    setTitle("");
+  };
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -23,7 +46,17 @@ export default function Index() {
           placeholder="Nhập tên công việc"
           placeholderTextColor="#9ca3af"
           returnKeyType="done"
+          onSubmitEditing={handleAddTodo}
         />
+        <Pressable
+          style={({ pressed }) => [
+            styles.addButton,
+            pressed && styles.addButtonPressed,
+          ]}
+          onPress={handleAddTodo}
+        >
+          <Text style={styles.addButtonText}>Thêm</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -50,9 +83,11 @@ const styles = StyleSheet.create({
     color: "#6b7280",
   },
   form: {
+    flexDirection: "row",
     paddingHorizontal: 16,
   },
   input: {
+    flex: 1,
     borderWidth: 1,
     borderColor: "#cbd5e1",
     borderRadius: 8,
@@ -60,5 +95,20 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 16,
     color: "#111827",
+  },
+  addButton: {
+    marginLeft: 8,
+    paddingHorizontal: 18,
+    justifyContent: "center",
+    borderRadius: 8,
+    backgroundColor: "#2563eb",
+  },
+  addButtonPressed: {
+    backgroundColor: "#1d4ed8",
+  },
+  addButtonText: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#ffffff",
   },
 });
