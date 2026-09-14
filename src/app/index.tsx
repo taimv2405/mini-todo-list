@@ -35,6 +35,14 @@ export default function Index() {
     setTitle("");
   };
 
+  const handleToggleTodo = (id: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.header}>
@@ -70,9 +78,19 @@ export default function Index() {
         data={todos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.itemTitle}>{item.title}</Text>
-          </View>
+          <Pressable
+            style={({ pressed }) => [styles.item, pressed && styles.itemPressed]}
+            onPress={() => handleToggleTodo(item.id)}
+          >
+            <Text
+              style={[styles.itemTitle, item.completed && styles.itemTitleDone]}
+            >
+              {item.title}
+            </Text>
+            <Text style={styles.itemStatus}>
+              {item.completed ? "Đã hoàn thành" : "Chưa hoàn thành"}
+            </Text>
+          </Pressable>
         )}
         contentContainerStyle={styles.listContent}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -139,9 +157,21 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "#f1f5f9",
   },
+  itemPressed: {
+    backgroundColor: "#e2e8f0",
+  },
   itemTitle: {
     fontSize: 16,
     color: "#111827",
+  },
+  itemTitleDone: {
+    textDecorationLine: "line-through",
+    color: "#9ca3af",
+  },
+  itemStatus: {
+    marginTop: 4,
+    fontSize: 12,
+    color: "#6b7280",
   },
   separator: {
     height: 10,
