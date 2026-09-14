@@ -1,4 +1,4 @@
-import { Button, TextInput, View } from "react-native";
+import { Button, StyleSheet, TextInput, View } from "react-native";
 
 type TodoInputProps = {
   value: string;
@@ -14,6 +14,7 @@ export default function TodoInput({
   return (
     <View>
       <TextInput
+        style={styles.input}
         value={value}
         onChangeText={onChangeText}
         placeholder="Nhập tên công việc"
@@ -24,3 +25,7 @@ export default function TodoInput({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: { borderWidth: 1, padding: 8 },
+});

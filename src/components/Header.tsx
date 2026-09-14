@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 type HeaderProps = {
   title: string;
@@ -8,8 +8,12 @@ type HeaderProps = {
 export default function Header({ title, description }: HeaderProps) {
   return (
     <View>
-      <Text>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <Text>{description}</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  title: { fontSize: 24, fontWeight: "bold" },
+});

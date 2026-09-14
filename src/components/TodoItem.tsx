@@ -1,4 +1,4 @@
-import { Button, Pressable, Text } from "react-native";
+import { Button, Pressable, StyleSheet, Text } from "react-native";
 
 import type { Todo } from "@/types/todo";
 
@@ -10,10 +10,16 @@ type TodoItemProps = {
 
 export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
-    <Pressable onPress={() => onToggle(todo.id)}>
-      <Text>{todo.title}</Text>
-      <Text>{todo.completed ? "Đã hoàn thành" : "Chưa hoàn thành"}</Text>
+    <Pressable style={styles.item} onPress={() => onToggle(todo.id)}>
+      <Text style={styles.title}>
+        {todo.completed ? "☑" : "☐"} {todo.title}
+      </Text>
       <Button title="Xóa" onPress={() => onDelete(todo.id)} />
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  item: { flexDirection: "row", alignItems: "center", paddingVertical: 8 },
+  title: { flex: 1 },
+});

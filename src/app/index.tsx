@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Header from "@/components/Header";
@@ -43,7 +44,7 @@ export default function Index() {
   const completedCount = todos.filter((todo) => todo.completed).length;
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screen}>
       <Header
         title="Mini Todo List"
         description="Buổi 2 - React Native Fundamentals"
@@ -62,3 +63,7 @@ export default function Index() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  screen: { flex: 1, padding: 16 },
+});
