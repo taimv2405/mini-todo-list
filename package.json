@@ -1,5 +1,5 @@
 {
-  "name": "hello-react-native",
+  "name": "mini-todo-list",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
