@@ -113,6 +113,14 @@ export default function Index() {
         )}
         contentContainerStyle={styles.listContent}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
+        ListEmptyComponent={
+          <View style={styles.empty}>
+            <Text style={styles.emptyTitle}>Chưa có công việc nào</Text>
+            <Text style={styles.emptyDescription}>
+              Nhập tên công việc rồi bấm Thêm để bắt đầu.
+            </Text>
+          </View>
+        }
       />
     </SafeAreaView>
   );
@@ -168,7 +176,25 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   listContent: {
+    flexGrow: 1,
     padding: 16,
+  },
+  empty: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 24,
+  },
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#111827",
+  },
+  emptyDescription: {
+    marginTop: 6,
+    fontSize: 14,
+    textAlign: "center",
+    color: "#6b7280",
   },
   item: {
     flexDirection: "row",
