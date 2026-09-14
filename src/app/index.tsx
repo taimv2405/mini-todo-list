@@ -47,6 +47,9 @@ export default function Index() {
     );
   };
 
+  const totalCount = todos.length;
+  const completedCount = todos.filter((todo) => todo.completed).length;
+
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.header}>
@@ -76,6 +79,16 @@ export default function Index() {
         >
           <Text style={styles.addButtonText}>Thêm</Text>
         </Pressable>
+      </View>
+
+      <View style={styles.stats}>
+        <Text style={styles.statsText}>
+          Tổng số công việc: <Text style={styles.statsValue}>{totalCount}</Text>
+        </Text>
+        <Text style={styles.statsText}>
+          Đã hoàn thành:{" "}
+          <Text style={styles.statsValue}>{completedCount}</Text>
+        </Text>
       </View>
 
       <FlatList
@@ -174,6 +187,23 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "700",
     color: "#ffffff",
+  },
+  stats: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 16,
+    marginTop: 16,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 8,
+    backgroundColor: "#eff6ff",
+  },
+  statsText: {
+    fontSize: 14,
+    color: "#1e40af",
+  },
+  statsValue: {
+    fontWeight: "700",
   },
   listContent: {
     flexGrow: 1,
